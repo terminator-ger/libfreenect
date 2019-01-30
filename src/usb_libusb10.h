@@ -45,20 +45,25 @@
   In camera.c, I use PKTS_PER_XFER = 128, NUM_XFERS = 4. There are a
   few rules: PKTS_PER_XFER * NUM_XFERS <= 1000, PKTS_PER_XFER % 8 == 0.
 */
-#define PKTS_PER_XFER 128
-#define NUM_XFERS 4
-#define DEPTH_PKTBUF 2048
-#define VIDEO_PKTBUF 2048
+    #define PKTS_PER_XFER 128
+    #define NUM_XFERS 4
+    #define DEPTH_PKTBUF 2048
+    #define VIDEO_PKTBUF 2048
 #else
-#ifdef _WIN32
-  #define PKTS_PER_XFER 32
-  #define NUM_XFERS 8
-#else
-  #define PKTS_PER_XFER 16
-  #define NUM_XFERS 16
-#endif
-#define DEPTH_PKTBUF 1920
-#define VIDEO_PKTBUF 1920
+    #ifdef _WIN32
+            #define PKTS_PER_XFER 32
+            #define NUM_XFERS 8
+    #else
+          #define PKTS_PER_XFER 32 // 25 fps depth media
+          #define NUM_XFERS 6
+
+//            #define PKTS_PER_XFER 128 // 23 fps depth median
+//            #define NUM_XFERS 7
+//             #define PKTS_PER_XFER 496 // 20 fps depth median
+//             #define NUM_XFERS 2
+   #endif
+   #define DEPTH_PKTBUF 1920
+   #define VIDEO_PKTBUF 1920
 #endif
 
 typedef struct {
